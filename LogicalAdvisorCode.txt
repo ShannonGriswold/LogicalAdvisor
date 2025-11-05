@@ -1,0 +1,103 @@
+% Questions
+%       It says that you should determine if the course is an elective based on recursion. Why do you need recursion? Can't you just check the fact?
+%       The fourth bullet point for grading should be that users can specify a language to find courses, right?
+%       How do we print with indents? \t doesn't work and neither does adding spaces
+
+check_prerequisite :- write("in check prerequisite"), nl.
+
+check_language :- write("in check language"), nl.
+
+logical_advisor :- 
+    write("Welcome to the Logical Advisor"), nl,
+    write("    1. Show Major Requirements"), nl,
+    write("    2. Check Elective Course"), nl,
+    write("    3. Check Prerequisites"), nl,
+    write("    4. Check Courses for Language"), nl,
+    write("Anything Else. Quit"), nl,
+    write("Enter Choice:"), nl,
+    prompt(_, 'Enter Choice:'),
+    read(Task),
+    (Task == 1 ->  major_requirements, logical_advisor;
+    Task == 2 ->  check_elective, logical_advisor;
+    Task == 3 ->  check_prerequisite, logical_advisor;
+    Task == 4 ->  check_language, logical_advisor;
+     write("Have a good day!")
+    ).
+
+
+major_requirements :- 
+    write("Core Courses"), nl, 
+    print_type(core), 
+    write("Breadth Area 1 Courses (Choose 2)"), nl, 
+    print_type(breadth1),
+    write("Breadth Area 2 Courses (Choose 2)"), nl,
+    print_type(breadth2),
+    write("Breadth Area 3 Courses (Choose 2)"), nl,
+    print_type(breadth3),
+    write("Breadth Area 4 Courses (Choose 2)"), nl,
+    print_type(breadth4),
+    write("Security Course (Choose 1)"), nl,
+    print_type(security).
+
+print_type(Type) :- (course(Name, Type, _, _), write("\t"), write(Name), nl, fail; true).
+
+check_elective :- 
+    prompt(_, 'Enter course'),
+    read(Course),
+    (course(Course, elective, _, _) ->  write(Course), write(" is an elective."), nl;
+    write(Course), write(" is not an elective."), nl).
+
+% classes are in the format (class, type [elective, core, breadth1, ...], prerequisites [as a list], language [as a list])
+course(csds132, core, [], ['Java']).
+course(csds233, core, [csds132], ['Java']).
+course(csds281, core, [csds132], ['Verilog', 'Assembly']).
+course(csds302, core, [], []).
+course(csds310, core, [csds302, csds233], []).
+course(csds395, core, [], []).
+course(csds341, breadth1, [csds302, csds233], ['SQL', 'Java']).
+course(csds356, breadth1, [csds132, csds233], []).
+course(csds390, breadth1, [csds233, csds290], []).
+course(csds393, breadth1, [csds233], ['Any']).
+course(csds312, breadth2, [csds132], []).
+course(csds314, breadth2, [csds281], []).
+course(csds325, breadth2, [csds233], []).
+course(csds388, breadth2, [csds233], ['C']).
+course(csds377, breadth3, [csds233, csds281], []).
+course(csds343, breadth3, [csds302], []).
+course(csds344, breadth3, [csds132], []).
+course(csds345, breadth3, [csds302, csds233], ['Java', 'C', 'C++', 'Haskell', 'Kotlin', 'Prolog', 'Spartie']).
+course(csds313, breadth4, [csds133, csds233], []).
+course(csds335, breadth4, [csds234, csds313], []).
+course(csds340, breadth4, [csds132], []).
+course(csds391, breadth4, [csds132], []).
+course(csds344, security, [csds132], []).
+course(csds356, security, [csds132, csds233], []).
+course(csds427, security, [csds325, csds425], []).
+course(csds444, security, [], []).
+course(csds448, security, [csds132], []).
+course(math408, security, [], []).
+course(csds101, elective, [], ['Python']).
+course(csds102, elective, [csds101, csds132], []).
+course(csds133, elective, [csds101, csds132], []).
+course(csds221, elective, [csds132], ['HTML', 'Javascript']).
+course(csds225, elective, [], []).
+course(csds234, elective, [csds133, csds233], []).
+course(csds235, elective, [csds132], ['C', 'C++']).
+course(csds237, elective, [csds132], ['Python']).
+course(csds245, elective, [csds132], ['Java']).
+course(csds275, elective, [csds132], []).
+course(csds285, elective, [csds132], ['HTML']).
+course(csds290, elective, [csds132], []). 
+course(csds293, elective, [csds233], ['Java']).
+course(csds305, elective, [csds234], []).
+course(csds317, elective, [csds234, csds305], ['Python', 'SQL']).
+course(csds323, elective, [csds233], []).
+course(csds361, elective, [csds233, csds302], ['Matlab']).
+course(csds364, elective, [csds132], []).
+course(csds373, elective, [csds132], ['Python', 'C++']).
+course(csds376, elective, [csds373, csds473], []).
+course(csds377, elective, [], ['Python', 'Objective-C', 'Javascript', 'HTML']).
+course(csds383, elective, [csds393], []).
+course(csds386, elective, [csds233, csds281], []).
+course(csds392, elective, [csds293, csds221], ['Swift']).
+course(csds394, elective, [], []).
