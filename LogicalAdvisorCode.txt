@@ -1,3 +1,4 @@
+% Mollie Ackerman and Shannon Griswold
 logical_advisor :- 
     write("Welcome to the Logical Advisor"), nl,
     write("What would you like to do?"), nl,
