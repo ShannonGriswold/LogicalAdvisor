@@ -1,7 +1,3 @@
-check_prerequisite :- write("in check prerequisite"), nl.
-
-check_language :- write("in check language"), nl.
-
 logical_advisor :- 
     write("Welcome to the Logical Advisor"), nl,
     write("    1. Show Major Requirements"), nl,
@@ -54,6 +50,26 @@ is_elective([H|_], Course) :- H == Course.
 is_elective([_|T], Course) :- is_elective(T, Course).
 is_elective([], _) :- false.
 
+printPrereq([H|T]) :-
+    write(H), nl,
+    checkPrereq(H),
+    printPrereq(T).
+
+printPrereq([]).
+checkPrereq(Course) :-
+    prereq(Course, Preq),
+    printPrereq(Preq).
+
+checkLang(Lang) :-
+    lang(Lang, L),
+    printLang(L).
+    
+printLang([H|T]) :-
+    write(H), nl,
+    printLang(T).
+
+printLang([]).
+
 core([csds132, csds233, csds281, csds302, csds310, csds395]).
 breadth1([csds341, csds356, csds390, csds393]).
 breadth2([csds312, csds314, csds325, csds338]).
@@ -64,3 +80,89 @@ elective([csds101, csds102, csds133, csds221, csds225, csds234, csds235, csds237
           csds245, csds275, csds285, csds290, csds293, csds305, csds317, csds323,
           csds361, csds364, csds373, csds376, csds377, csds383, csds386, csds392, 
           csds394]).
+
+prereq(csds132, []).
+prereq(csds233, [csds132]).
+prereq(csds281, [csds132]).
+prereq(csds302, []).
+prereq(csds310, [csds302, csds233]).
+prereq(csds395, [] ).
+prereq(csds341, [csds302, csds233]).
+prereq(csds356, [csds132, csds233]).
+prereq(csds390, [csds233, csds290]).
+prereq(csds393, [csds233]).
+prereq(csds312, [csds132]).
+prereq(csds314, [csds281]).
+prereq(csds325, [csds233]).
+prereq(csds388,  [csds233]).
+prereq(csds377,  [csds233, csds281]).
+prereq(csds343,  [csds302]).
+prereq(csds344,  [csds132]).
+prereq(csds345,  [csds302, csds233]).
+prereq(csds313,  [csds133, csds233]).
+prereq(csds335,  [csds234, csds313]).
+prereq(csds340, [csds132]).
+prereq(csds391,  [csds132]).
+prereq(csds344, [csds132]).
+prereq(csds356,  [csds132, csds233]).
+prereq(csds427,  [csds325, csds425]).
+prereq(csds444,  []).
+prereq(csds448, [csds132]).
+prereq(math408,  []).
+prereq(csds101,  []).
+prereq(csds102,  [csds101, csds132]).
+prereq(csds133,  [csds101, csds132]).
+prereq(csds221,  [csds132]).
+prereq(csds225,  []).
+prereq(csds234,  [csds133, csds233]).
+prereq(csds235, [csds132]).
+prereq(csds237,  [csds132]).
+prereq(csds245,  [csds132]).
+prereq(csds275,  [csds132]).
+prereq(csds285,  [csds132]).
+prereq(csds290,  [csds132]). 
+prereq(csds293,  [csds233]).
+prereq(csds305,  [csds234]).
+prereq(csds317,  [csds234, csds305]).
+prereq(csds323,  [csds233]).
+prereq(csds361, [csds233, csds302]).
+prereq(csds364, [csds132]).
+prereq(csds373, [csds132]).
+prereq(csds376, [csds373, csds473]).
+prereq(csds377, []).
+prereq(csds383,  [csds393]).
+prereq(csds386,  [csds233, csds281]).
+prereq(csds392, [csds293, csds221]).
+prereq(csds394, elective, [], []).
+lang('Java', [csds132, csds233, csds341, csds345, csds245, csds293, csds393]).
+lang('C', [csds345, csds235, csds338]).
+lang('C++', [csds345, csds235, csds373]).
+lang('python', [csds101, csds237, csds317, csds373, csds377]).
+lang('SQL', [csds341, csds317, csds393]).
+lang('Swift', [csds392]).
+lang('JavaScript', [csds221, csds377, csds393]).
+lang('Spartie', [csds345]).
+lang('Haskell', [csds345]).
+lang('Prolog', [csds345]).
+lang('Verilog', [csds281]).
+lang('Assembly', [csds281]).
+lang('MatLab', [csds361]).
+lang('Objective-C', [csds377]).
+
+    
+    
+    
+
+
+
+
+
+
+
+    
+ 
+    
+    
+    
+    
+    
