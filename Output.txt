@@ -1,0 +1,152 @@
+logical_advisor.
+Welcome to the Logical Advisor
+What would you like to do?
+        1. Show Major Requirements
+        2. Check Elective Course
+        3. Check Prerequisites
+        4. Check Courses for Language
+        Anything Else. Quit
+        Enter Choice:
+1
+Core Courses
+        csds132
+        csds233
+        csds281
+        csds302
+        csds310
+        csds395
+Breadth Area 1 Courses (Choose 2)
+        csds341
+        csds356
+        csds390
+        csds393
+Breadth Area 2 Courses (Choose 2)
+        csds312
+        csds314
+        csds325
+        csds338
+Breadth Area 3 Courses (Choose 2)
+        csds337
+        csds343
+        csds344
+        csds345
+Breadth Area 4 Courses (Choose 2)
+        csds313
+        csds335
+        csds340
+        csds391
+Security Course (Choose 1)
+        csds344
+        csds356
+        csds427
+        csds444
+        csds448
+        math408
+Welcome to the Logical Advisor
+What would you like to do?
+        1. Show Major Requirements
+        2. Check Elective Course
+        3. Check Prerequisites
+        4. Check Courses for Language
+        Anything Else. Quit
+        Enter Choice:
+2
+        Enter elective course:
+csds399
+csds399 is not an elective.
+Welcome to the Logical Advisor
+What would you like to do?
+        1. Show Major Requirements
+        2. Check Elective Course
+        3. Check Prerequisites
+        4. Check Courses for Language
+        Anything Else. Quit
+        Enter Choice:
+2
+        Enter elective course:
+csds392
+csds392 is an elective.
+Welcome to the Logical Advisor
+What would you like to do?
+        1. Show Major Requirements
+        2. Check Elective Course
+        3. Check Prerequisites
+        4. Check Courses for Language
+        Anything Else. Quit
+        Enter Choice:
+3
+Enter course to get prereqs:
+csds233
+        Prereq: csds132
+Welcome to the Logical Advisor
+What would you like to do?
+        1. Show Major Requirements
+        2. Check Elective Course
+        3. Check Prerequisites
+        4. Check Courses for Language
+        Anything Else. Quit
+        Enter Choice:
+3
+Enter course to get prereqs:
+csds310
+        Prereq: csds233
+        Prereq: csds132
+        Prereq: csds302
+Welcome to the Logical Advisor
+What would you like to do?
+        1. Show Major Requirements
+        2. Check Elective Course
+        3. Check Prerequisites
+        4. Check Courses for Language
+        Anything Else. Quit
+        Enter Choice:
+4
+Enter language:
+'C'
+The below courses include C
+        csds345
+        csds235
+        csds338
+        csds337
+Welcome to the Logical Advisor
+What would you like to do?
+        1. Show Major Requirements
+        2. Check Elective Course
+        3. Check Prerequisites
+        4. Check Courses for Language
+        Anything Else. Quit
+        Enter Choice:
+4
+Enter language:
+'Java'
+The below courses include Java
+        csds132
+        csds233
+        csds341
+        csds345
+        csds245
+        csds293
+        csds393
+Welcome to the Logical Advisor
+What would you like to do?
+        1. Show Major Requirements
+        2. Check Elective Course
+        3. Check Prerequisites
+        4. Check Courses for Language
+        Anything Else. Quit
+        Enter Choice:
+4
+Enter language:
+'Dart'
+Sorry, no courses include Dart
+Welcome to the Logical Advisor
+What would you like to do?
+        1. Show Major Requirements
+        2. Check Elective Course
+        3. Check Prerequisites
+        4. Check Courses for Language
+        Anything Else. Quit
+        Enter Choice:
+5
+Have a good day!
+1true
