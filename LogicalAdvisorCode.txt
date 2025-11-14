@@ -1,11 +1,12 @@
 logical_advisor :- 
     write("Welcome to the Logical Advisor"), nl,
-    write("    1. Show Major Requirements"), nl,
-    write("    2. Check Elective Course"), nl,
-    write("    3. Check Prerequisites"), nl,
-    write("    4. Check Courses for Language"), nl,
-    write("Anything Else. Quit"), nl,
-    write("Enter Choice:"), nl,
+    write("What would you like to do?"), nl,
+    tab(8), write("1. Show Major Requirements"), nl,
+    tab(8), write("2. Check Elective Course"), nl,
+    tab(8), write("3. Check Prerequisites"), nl,
+    tab(8), write("4. Check Courses for Language"), nl,
+    tab(8), write("Anything Else. Quit"), nl,
+    tab(8), write("Enter Choice:"), nl,
     prompt(_, 'Enter Choice:'),
     read(Task),
     (Task == 1 ->  major_requirements, logical_advisor;
@@ -36,11 +37,12 @@ major_requirements :-
     security(Security),
     print_list(Security).
 
-print_list([H|T]) :- write(H), nl, print_list(T).
+print_list([H|T]) :- tab(8), write(H), nl, print_list(T).
 print_list([]).
 
 check_elective :- 
     elective(Electives),
+    tab(8), write("Enter elective course:"), nl,
     prompt(_, 'Enter course'),
     read(Course),
     (is_elective(Electives, Course) ->  write(Course), write(" is an elective."), nl;
@@ -50,30 +52,41 @@ is_elective([H|_], Course) :- H == Course.
 is_elective([_|T], Course) :- is_elective(T, Course).
 is_elective([], _) :- false.
 
-printPrereq([H|T]) :-
-    write(H), nl,
-    checkPrereq(H),
-    printPrereq(T).
+print_prereq([H|T]) :-
+    tab(8), write('Prereq: '), write(H), nl,
+    check_prereq(H),
+    print_prereq(T).
 
-printPrereq([]).
-checkPrereq(Course) :-
+print_prereq([]).
+
+check_prerequisite() :- 
+    write("Enter course to get prereqs:"), nl,
+    prompt(_, 'Enter course'),
+    read(Course),
+    check_prereq(Course).
+
+check_prereq(Course) :-
     prereq(Course, Preq),
-    printPrereq(Preq).
+    print_prereq(Preq).
 
-checkLang(Lang) :-
-    lang(Lang, L),
-    printLang(L).
+check_language() :- 
+    write("Enter language:"), nl,
+    prompt(_, 'Enter language'),
+    read(Language),
+    (lang(Language, L) ->  
+    write('The below courses include '), write(Language), nl, print_lang(L); 
+    write('Sorry, no courses include '), write(Language), nl).
     
-printLang([H|T]) :-
-    write(H), nl,
-    printLang(T).
+print_lang([H|T]) :-
+    tab(8), write(H), nl,
+    print_lang(T).
 
-printLang([]).
+print_lang([]).
 
 core([csds132, csds233, csds281, csds302, csds310, csds395]).
 breadth1([csds341, csds356, csds390, csds393]).
 breadth2([csds312, csds314, csds325, csds338]).
-breadth3([csds377, csds343, csds344, csds345]).
+breadth3([csds337, csds343, csds344, csds345]).
 breadth4([csds313, csds335, csds340, csds391]).
 security([csds344, csds356, csds427, csds444, csds448, math408]).
 elective([csds101, csds102, csds133, csds221, csds225, csds234, csds235, csds237, 
@@ -85,7 +98,7 @@ prereq(csds132, []).
 prereq(csds233, [csds132]).
 prereq(csds281, [csds132]).
 prereq(csds302, []).
-prereq(csds310, [csds302, csds233]).
+prereq(csds310, [csds233, csds302]).
 prereq(csds395, [] ).
 prereq(csds341, [csds302, csds233]).
 prereq(csds356, [csds132, csds233]).
@@ -94,48 +107,48 @@ prereq(csds393, [csds233]).
 prereq(csds312, [csds132]).
 prereq(csds314, [csds281]).
 prereq(csds325, [csds233]).
-prereq(csds388,  [csds233]).
-prereq(csds377,  [csds233, csds281]).
-prereq(csds343,  [csds302]).
-prereq(csds344,  [csds132]).
-prereq(csds345,  [csds302, csds233]).
-prereq(csds313,  [csds133, csds233]).
-prereq(csds335,  [csds234, csds313]).
-prereq(csds340, [csds132]).
-prereq(csds391,  [csds132]).
+prereq(csds388, [csds233]).
+prereq(csds377, [csds233, csds281]).
+prereq(csds343, [csds302]).
 prereq(csds344, [csds132]).
-prereq(csds356,  [csds132, csds233]).
-prereq(csds427,  [csds325, csds425]).
-prereq(csds444,  []).
+prereq(csds345, [csds302, csds233]).
+prereq(csds313, [csds133, csds233]).
+prereq(csds335, [csds234, csds313]).
+prereq(csds340, [csds132]).
+prereq(csds391, [csds132]).
+prereq(csds344, [csds132]).
+prereq(csds356, [csds132, csds233]).
+prereq(csds427, [csds325, csds425]).
+prereq(csds444, []).
 prereq(csds448, [csds132]).
-prereq(math408,  []).
-prereq(csds101,  []).
-prereq(csds102,  [csds101, csds132]).
-prereq(csds133,  [csds101, csds132]).
-prereq(csds221,  [csds132]).
-prereq(csds225,  []).
-prereq(csds234,  [csds133, csds233]).
+prereq(math408, []).
+prereq(csds101, []).
+prereq(csds102, [csds101, csds132]).
+prereq(csds133, [csds101, csds132]).
+prereq(csds221, [csds132]).
+prereq(csds225, []).
+prereq(csds234, [csds133, csds233]).
 prereq(csds235, [csds132]).
-prereq(csds237,  [csds132]).
-prereq(csds245,  [csds132]).
-prereq(csds275,  [csds132]).
-prereq(csds285,  [csds132]).
-prereq(csds290,  [csds132]). 
-prereq(csds293,  [csds233]).
-prereq(csds305,  [csds234]).
-prereq(csds317,  [csds234, csds305]).
-prereq(csds323,  [csds233]).
+prereq(csds237, [csds132]).
+prereq(csds245, [csds132]).
+prereq(csds275, [csds132]).
+prereq(csds285, [csds132]).
+prereq(csds290, [csds132]). 
+prereq(csds293, [csds233]).
+prereq(csds305, [csds234]).
+prereq(csds317, [csds234, csds305]).
+prereq(csds323, [csds233]).
 prereq(csds361, [csds233, csds302]).
 prereq(csds364, [csds132]).
 prereq(csds373, [csds132]).
 prereq(csds376, [csds373, csds473]).
 prereq(csds377, []).
-prereq(csds383,  [csds393]).
-prereq(csds386,  [csds233, csds281]).
+prereq(csds383, [csds393]).
+prereq(csds386, [csds233, csds281]).
 prereq(csds392, [csds293, csds221]).
-prereq(csds394, elective, [], []).
+prereq(csds394, []).
 lang('Java', [csds132, csds233, csds341, csds345, csds245, csds293, csds393]).
-lang('C', [csds345, csds235, csds338]).
+lang('C', [csds345, csds235, csds338, csds337]).
 lang('C++', [csds345, csds235, csds373]).
 lang('python', [csds101, csds237, csds317, csds373, csds377]).
 lang('SQL', [csds341, csds317, csds393]).
